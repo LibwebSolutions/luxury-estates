@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Chen | LuxEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c19a6b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c19a6b;
+        }
+
+        .nav-links a.active {
+            color: #c19a6b;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Agent Header */
+        .agent-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .agent-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .agent-header h1 strong {
+            font-weight: 700;
+        }
+
+        .agent-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #eee;
+        }
+
+        /* Agent Profile */
+        .agent-profile {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .agent-sidebar {
+            width: 350px;
+            flex-shrink: 0;
+        }
+
+        .agent-main {
+            flex: 1;
+        }
+
+        /* Agent Card */
+        .agent-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .agent-photo {
+            height: 300px;
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1968&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .agent-badge {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background-color: #c19a6b;
+            color: white;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .agent-info {
+            padding: 40px;
+        }
+
+        .agent-name {
+            font-size: 32px;
+            color: #1a3c5e;
+            margin-bottom: 10px;
+        }
+
+        .agent-title {
+            color: #c19a6b;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .agent-stats {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .properties-sold {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a3c5e;
+            margin-bottom: 10px;
+        }
+
+        .properties-label {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .agent-contact {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .contact-item i {
+            color: #c19a6b;
+            font-size: 20px;
+            width: 30px;
+        }
+
+        .contact-details h4 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .contact-btn-large {
+            width: 100%;
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn-large:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Agent Bio */
+        .bio-section {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: #1a3c5e;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .bio-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .bio-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .bio-stat {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .bio-stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #c19a6b;
+            margin-bottom: 5px;
+        }
+
+        .bio-stat-label {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Featured Properties */
+        .properties-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            color: #1a3c5e;
+        }
+
+        .view-all {
+            background-color: transparent;
+            color: #c19a6b;
+            border: 2px solid #c19a6b;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .view-all:hover {
+            background-color: #c19a6b;
+            color: white;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .property-card-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .property-card-info {
+            padding: 25px;
+        }
+
+        .property-card-title {
+            font-size: 20px;
+            color: #1a3c5e;
+            margin-bottom: 10px;
+        }
+
+        .property-card-location {
+            color: #c19a6b;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .property-card-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .property-card-price {
+            font-size: 24px;
+            color: #1a3c5e;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .property-card-btn {
+            width: 100%;
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .property-card-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px;
+            border-radius: 15px;
+            margin-bottom: 80px;
+        }
+
+        .testimonials-section .section-title {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background-color: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #c19a6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .cta-card {
+            background-color: white;
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-card h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 20px;
+        }
+
+        .cta-card p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .cta-btn-primary {
+            background-color: #c19a6b;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn-primary:hover {
+            background-color: #b08a5b;
+        }
+
+        .cta-btn-secondary {
+            background-color: transparent;
+            color: #1a3c5e;
+            border: 2px solid #1a3c5e;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cta-btn-secondary:hover {
+            background-color: #1a3c5e;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #c19a6b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c19a6b;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: #c19a6b;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links-horizontal {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links-horizontal a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links-horizontal a:hover {
+            color: #c19a6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .agent-profile {
+                flex-direction: column;
+            }
+            
+            .agent-sidebar {
+                width: 100%;
+            }
+            
+            .properties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .bio-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .agent-header h1 {
+                font-size: 36px;
+            }
+            
+            .agent-header p {
+                font-size: 18px;
+            }
+            
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bio-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-card {
+                padding: 40px 20px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Lux<span>Estate</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="agents.html" class="active">Our Agents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="contact-btn">Contact Us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Agent Header -->
+    <section class="agent-header">
+        <div class="container">
+            <h1>Meet <strong>Michael Chen</strong></h1>
+            <p>Luxury Property Specialist with expertise in high-end residential real estate</p>
+        </div>
+    </section>
+
+    <!-- Agent Profile -->
+    <div class="container">
+        <div class="agent-profile">
+            <!-- Sidebar -->
+            <div class="agent-sidebar">
+                <div class="agent-card">
+                    <div class="agent-photo">
+                        <div class="agent-badge">Top Seller</div>
+                    </div>
+                    <div class="agent-info">
+                        <h2 class="agent-name">Michael Chen</h2>
+                        <div class="agent-title">Luxury Property Specialist</div>
+                        
+                        <div class="agent-stats">
+                            <div class="properties-sold">38</div>
+                            <div class="properties-label">Properties Sold</div>
+                        </div>
+                        
+                        <div class="agent-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div class="contact-details">
+                                    <h4>Email</h4>
+                                    <p>michael.chen@luxestate.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div class="contact-details">
+                                    <h4>Phone</h4>
+                                    <p>+1 (555) 234-5678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="contact-details">
+                                    <h4>Office</h4>
+                                    <p>Malibu, CA</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="contact-btn-large" id="contactAgentBtn">Contact Michael</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="agent-main">
+                <!-- Bio Section -->
+                <div class="bio-section">
+                    <h2 class="section-title">Professional Bio</h2>
+                    <div class="bio-content">
+                        <p>Michael Chen is a Luxury Property Specialist with over 12 years of experience in high-end residential real estate, particularly focusing on coastal properties in Malibu, Santa Monica, and the Pacific Palisades. His expertise in waterfront estates and architectural masterpieces has made him one of the most sought-after agents in Southern California's luxury market.</p>
+                        
+                        <p>With 38 properties sold and over $180 million in total sales volume, Michael combines architectural appreciation with market savvy to match discerning clients with their dream properties. His portfolio includes some of the most iconic glass houses, contemporary estates, and beachfront properties along the California coast.</p>
+                        
+                        <p>Michael's approach is characterized by his attention to architectural detail, understanding of coastal property dynamics, and personalized client service. He believes that finding the perfect luxury property requires not just market knowledge, but an appreciation for design, location, and lifestyle.</p>
+                        
+                        <div class="bio-stats">
+                            <div class="bio-stat">
+                                <div class="bio-stat-value">12+</div>
+                                <div class="bio-stat-label">Years Experience</div>
+                            </div>
+                            <div class="bio-stat">
+                                <div class="bio-stat-value">$180M+</div>
+                                <div class="bio-stat-label">Sales Volume</div>
+                            </div>
+                            <div class="bio-stat">
+                                <div class="bio-stat-value">96%</div>
+                                <div class="bio-stat-label">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Properties -->
+                <div class="properties-section">
+                    <div class="section-header">
+                        <h2>Recently Sold Properties</h2>
+                        <button class="view-all" onclick="window.location.href='properties.html'">View All Properties</button>
+                    </div>
+                    
+                    <div class="properties-grid">
+                        <!-- Property 1 -->
+                        <div class="property-card">
+                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80');"></div>
+                            <div class="property-card-info">
+                                <h3 class="property-card-title">Contemporary Glass House</h3>
+                                <div class="property-card-location">Malibu, CA</div>
+                                <div class="property-card-features">
+                                    <span>5 Beds</span>
+                                    <span>5 Baths</span>
+                                    <span>6,800 sq ft</span>
+                                </div>
+                                <div class="property-card-price">$3,200,000</div>
+                                <button class="property-card-btn" onclick="window.location.href='property2.html'">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 2 -->
+                        <div class="property-card">
+                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1967&q=80');"></div>
+                            <div class="property-card-info">
+                                <h3 class="property-card-title">Oceanfront Modern Villa</h3>
+                                <div class="property-card-location">Santa Monica, CA</div>
+                                <div class="property-card-features">
+                                    <span>4 Beds</span>
+                                    <span>5 Baths</span>
+                                    <span>5,400 sq ft</span>
+                                </div>
+                                <div class="property-card-price">$4,100,000</div>
+                                <button class="property-card-btn">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 3 -->
+                        <div class="property-card">
+                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
+                            <div class="property-card-info">
+                                <h3 class="property-card-title">Pacific Palisades Estate</h3>
+                                <div class="property-card-location">Pacific Palisades, CA</div>
+                                <div class="property-card-features">
+                                    <span>6 Beds</span>
+                                    <span>7 Baths</span>
+                                    <span>8,200 sq ft</span>
+                                </div>
+                                <div class="property-card-price">$4,800,000</div>
+                                <button class="property-card-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="testimonials-section">
+                    <h2 class="section-title">Client Testimonials</h2>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Michael's knowledge of coastal properties is exceptional. He found us the perfect glass house in Malibu that exceeded all our expectations. His attention to detail and understanding of architectural design made all the difference."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AR</div>
+                            <div class="author-info">
+                                <h4>Amanda & Robert Johnson</h4>
+                                <p>Purchased Contemporary Glass House in Malibu</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"Working with Michael was a fantastic experience. He understood exactly what we were looking for in a waterfront property and negotiated brilliantly on our behalf. We couldn't be happier with our new home."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SD</div>
+                            <div class="author-info">
+                                <h4>Sarah Davis</h4>
+                                <p>Sold oceanfront villa in Santa Monica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <div class="cta-card">
+                <h2>Work With Michael</h2>
+                <p>If you're looking for a luxury coastal property or architectural masterpiece, Michael's expertise in high-end residential real estate ensures you find the perfect property. Contact him today to discuss your real estate goals.</p>
+                
+                <div class="cta-buttons">
+                    <button class="cta-btn-primary" id="scheduleConsultationBtn">Schedule a Consultation</button>
+                    <button class="cta-btn-secondary" onclick="window.location.href='properties.html'">View Properties</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxEstate</h3>
+                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="agents.html">Our Agents</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Property Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Luxury Homes</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Penthouses</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Condos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 LuxEstate. All rights reserved.
+                </div>
+                <ul class="footer-links-horizontal">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact agent button
+        document.getElementById('contactAgentBtn').addEventListener('click', function() {
+            alert('Contacting Michael Chen...\n\nPhone: +1 (555) 234-5678\nEmail: michael.chen@luxestate.com\n\nMichael will respond within 24 hours.');
+        });
+        
+        // Schedule consultation button
+        document.getElementById('scheduleConsultationBtn').addEventListener('click', function() {
+            alert('Scheduling a consultation with Michael Chen...\n\nPlease provide your preferred date and time, and Michael will confirm the appointment within 24 hours.');
+        });
+        
+        // Header contact button
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        });
+        
+        // Property card buttons
+        document.querySelectorAll('.property-card-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const propertyTitle = this.closest('.property-card').querySelector('.property-card-title').textContent;
+                if (this.textContent === 'View Details') {
+                    alert(`Opening details page for "${propertyTitle}"\n\nThis would navigate to the detailed property page.`);
+                }
+            });
+        });
+        
+        // View all properties button
+        document.querySelector('.view-all').addEventListener('click', function() {
+            alert('Navigating to all properties page...');
+        });
+        
+        // Email click functionality
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const text = this.querySelector('p').textContent;
+                if (text.includes('@')) {
+                    alert(`Opening email client to: ${text}`);
+                } else if (text.includes('+1')) {
+                    alert(`Calling: ${text}`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

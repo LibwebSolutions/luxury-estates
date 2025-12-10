@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Agents | LuxEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c19a6b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c19a6b;
+        }
+
+        .nav-links a.active {
+            color: #c19a6b;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .page-header h1 strong {
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #eee;
+            line-height: 1.8;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            padding: 60px 0;
+            background-color: white;
+            margin-bottom: 60px;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-content h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 30px;
+        }
+
+        .intro-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: #c19a6b;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Agents Section */
+        .agents-section {
+            padding: 60px 0 100px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #777;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .agent-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .agent-img {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .agent-img.sarah {
+            background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1961&q=80');
+        }
+
+        .agent-img.michael {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1968&q=80');
+        }
+
+        .agent-img.emily {
+            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+        }
+
+        .agent-img.david {
+            background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+        }
+
+        .agent-badge {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            background-color: #c19a6b;
+            color: white;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .agent-info {
+            padding: 30px;
+        }
+
+        .agent-name {
+            font-size: 24px;
+            color: #1a3c5e;
+            margin-bottom: 5px;
+        }
+
+        .agent-title {
+            color: #c19a6b;
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .agent-stats {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .properties-sold {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            margin-bottom: 5px;
+        }
+
+        .properties-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .agent-contact {
+            margin-bottom: 25px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .contact-info i {
+            color: #c19a6b;
+            width: 20px;
+        }
+
+        .agent-btn {
+            width: 100%;
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .agent-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 80px;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .cta-content h2 strong {
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            color: #ddd;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            background-color: #c19a6b;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #b08a5b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #c19a6b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c19a6b;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: #c19a6b;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links-horizontal {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links-horizontal a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links-horizontal a:hover {
+            color: #c19a6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .agents-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .page-header p {
+                font-size: 18px;
+            }
+            
+            .intro-content h2 {
+                font-size: 30px;
+            }
+            
+            .agents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                gap: 30px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Lux<span>Estate</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="property.html">Properties</a></li>
+                    <li><a href="agent.html" class="active">Our Agents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact">Contact</a></li>
+                </ul>
+                <button class="contact-btn">Contact Us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Meet Our <strong>Expert Agents</strong></h1>
+            <p>With years of experience and in-depth market knowledge, we're here to guide you every step of the way.</p>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <h2>Why Choose LuxEstate Agents?</h2>
+                <p>Our team of luxury real estate specialists brings unparalleled expertise, market knowledge, and dedication to every client relationship. We don't just sell properties—we build lasting relationships and ensure our clients find their perfect luxury home.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">178+</div>
+                        <div class="stat-label">Properties Sold</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">$2.1B+</div>
+                        <div class="stat-label">Total Sales Volume</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agents Section -->
+    <section class="agents-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Luxury Specialists</h2>
+                <p>Each agent specializes in different aspects of luxury real estate to serve your unique needs</p>
+            </div>
+            
+            <div class="agents-grid">
+                <!-- Agent 1 -->
+                <div class="agent-card">
+                    <div class="agent-img sarah">
+                        <div class="agent-badge">Senior Agent</div>
+                    </div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Sarah Mitchell</h3>
+                        <div class="agent-title">Senior Real Estate Agent</div>
+                        
+                        <div class="agent-stats">
+                            <div class="properties-sold">47</div>
+                            <div class="properties-label">Properties Sold</div>
+                        </div>
+                        
+                        <div class="agent-contact">
+                            <div class="contact-info">
+                                <i class="fas fa-envelope"></i>
+                                <span>sarah.mitchell@luxestate.com</span>
+                            </div>
+                            <div class="contact-info">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                        </div>
+                        
+<button class="agent-btn" data-agent="Sarah Mitchell" onclick="window.location.href='agent1.html'">Contact Agent</button>                    </div>
+                </div>
+                
+                <!-- Agent 2 -->
+                <div class="agent-card">
+                    <div class="agent-img michael">
+                        <div class="agent-badge">Top Seller</div>
+                    </div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Michael Chen</h3>
+                        <div class="agent-title">Luxury Property Specialist</div>
+                        
+                        <div class="agent-stats">
+                            <div class="properties-sold">38</div>
+                            <div class="properties-label">Properties Sold</div>
+                        </div>
+                        
+                        <div class="agent-contact">
+                            <div class="contact-info">
+                                <i class="fas fa-envelope"></i>
+                                <span>michael.chen@luxestate.com</span>
+                            </div>
+                            <div class="contact-info">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 234-5678</span>
+                            </div>
+                        </div>
+                        
+<button class="agent-btn" data-agent="Michael Chen" onclick="window.location.href='agent2.html'">Contact Agent</button>                    </div>
+                </div>
+                
+                <!-- Agent 3 -->
+                <div class="agent-card">
+                    <div class="agent-img emily">
+                        <div class="agent-badge">International</div>
+                    </div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">Emily Rodriguez</h3>
+                        <div class="agent-title">International Properties Expert</div>
+                        
+                        <div class="agent-stats">
+                            <div class="properties-sold">52</div>
+                            <div class="properties-label">Properties Sold</div>
+                        </div>
+                        
+                        <div class="agent-contact">
+                            <div class="contact-info">
+                                <i class="fas fa-envelope"></i>
+                                <span>emily.rodriguez@luxestate.com</span>
+                            </div>
+                            <div class="contact-info">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 345-6789</span>
+                            </div>
+                        </div>
+                        
+                        <button class="agent-btn" data-agent="Emily Rodriguez">Contact Agent</button>
+                    </div>
+                </div>
+                
+                <!-- Agent 4 -->
+                <div class="agent-card">
+                    <div class="agent-img david">
+                        <div class="agent-badge">Commercial</div>
+                    </div>
+                    <div class="agent-info">
+                        <h3 class="agent-name">David Thompson</h3>
+                        <div class="agent-title">Commercial Real Estate Advisor</div>
+                        
+                        <div class="agent-stats">
+                            <div class="properties-sold">41</div>
+                            <div class="properties-label">Properties Sold</div>
+                        </div>
+                        
+                        <div class="agent-contact">
+                            <div class="contact-info">
+                                <i class="fas fa-envelope"></i>
+                                <span>david.thompson@luxestate.com</span>
+                            </div>
+                            <div class="contact-info">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (555) 456-7890</span>
+                            </div>
+                        </div>
+                        
+                        <button class="agent-btn" data-agent="David Thompson">Contact Agent</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Looking for <strong>Expert Guidance?</strong></h2>
+                <p>Connect with one of our experienced agents today and let us help you find your dream property. Our team is dedicated to providing personalized service and expert advice throughout your luxury real estate journey.</p>
+                <button class="cta-btn">Schedule a Consultation</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxEstate</h3>
+                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="agents.html">Our Agents</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Property Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Luxury Homes</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Penthouses</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Condos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 LuxEstate. All rights reserved.
+                </div>
+                <ul class="footer-links-horizontal">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Agent contact button functionality
+        document.querySelectorAll('.agent-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const agentName = this.getAttribute('data-agent');
+                const agentEmail = this.closest('.agent-info').querySelector('.contact-info:nth-child(3) span').textContent;
+                const agentPhone = this.closest('.agent-info').querySelector('.contact-info:nth-child(4) span').textContent;
+                
+                alert(`Contacting ${agentName}\nEmail: ${agentEmail}\nPhone: ${agentPhone}\n\nA copy of this request has been sent to our team. ${agentName} will contact you within 24 hours.`);
+            });
+        });
+        
+        // CTA button functionality
+        document.querySelector('.cta-btn').addEventListener('click', function() {
+            alert('Scheduling a consultation...\n\nOur team will contact you within 24 hours to arrange a convenient time for your consultation.');
+        });
+        
+        // Header contact button
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        });
+        
+        // Email link functionality
+        document.querySelectorAll('.contact-info .fa-envelope').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const email = this.nextElementSibling.textContent;
+                alert(`Opening email client to send message to: ${email}`);
+            });
+        });
+    </script>
+</body>
+</html>

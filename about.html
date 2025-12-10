@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | LuxEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c19a6b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c19a6b;
+        }
+
+        .nav-links a.active {
+            color: #c19a6b;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .page-header h1 strong {
+            font-weight: 700;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            padding: 80px 0;
+            background-color: white;
+            margin-bottom: 60px;
+        }
+
+        .mission-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mission-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .mission-header h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 15px;
+        }
+
+        .mission-header p {
+            color: #666;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .mission-details {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .mission-text {
+            flex: 1;
+        }
+
+        .mission-text h3 {
+            font-size: 28px;
+            color: #1a3c5e;
+            margin-bottom: 25px;
+        }
+
+        .mission-text p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .mission-image {
+            flex: 1;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+            margin-bottom: 80px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            color: #c19a6b;
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1a3c5e;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Global Reach Section */
+        .global-section {
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .city-card {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .city-card:hover {
+            border-color: #c19a6b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .city-icon {
+            font-size: 36px;
+            color: #c19a6b;
+            margin-bottom: 15px;
+        }
+
+        .city-name {
+            font-size: 20px;
+            color: #1a3c5e;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .city-country {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .global-description {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 80px;
+        }
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .cta-content h2 strong {
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 18px;
+            color: #ddd;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            background-color: #c19a6b;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #b08a5b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #c19a6b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c19a6b;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: #c19a6b;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links-horizontal {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links-horizontal a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links-horizontal a:hover {
+            color: #c19a6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .mission-details {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .mission-image {
+                width: 100%;
+            }
+            
+            .cities-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .mission-header h2 {
+                font-size: 30px;
+            }
+            
+            .mission-text h3 {
+                font-size: 24px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+            
+            .cities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .section-header h2 {
+                font-size: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Lux<span>Estate</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="property.html">Properties</a></li>
+                    <li><a href="agent.html">Our Agents</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="contact-btn">Contact Us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About <strong>LuxEstate</strong></h1>
+            <p>Our commitment to excellence and personalized service has made us a trusted name in luxury real estate.</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-header">
+                    <h2>Our Mission</h2>
+                    <p>At LuxEstate, our mission is to redefine the luxury real estate experience. We believe that finding your perfect property should be an exciting journey, not a stressful case.</p>
+                </div>
+                
+                <div class="mission-details">
+                    <div class="mission-text">
+                        <h3>Excellence in Every Detail</h3>
+                        <p>We combine cutting-edge technology with personalized service to deliver exceptional results for our clients. Whether you're buying, selling, or investing, we're committed to exceeding your expectations at every turn.</p>
+                        <p>Our team of experts brings decades of combined experience in luxury real estate, ensuring that every transaction is handled with the utmost professionalism and care.</p>
+                        <p>We pride ourselves on our deep market knowledge, attention to detail, and unwavering commitment to our clients' success.</p>
+                    </div>
+                    <div class="mission-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Properties Sold</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Expert Agents</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach Section -->
+    <section class="global-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Global Reach, Local Expertise</h2>
+                <p>With offices and partners in major cities worldwide, we offer unparalleled access to premium properties across the globe. Our local experts provide in-depth market knowledge and personalized service wherever your real estate journey takes you.</p>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="city-name">Los Angeles</div>
+                    <div class="city-country">United States</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="city-name">New York</div>
+                    <div class="city-country">United States</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <div class="city-name">Miami</div>
+                    <div class="city-country">United States</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <div class="city-name">London</div>
+                    <div class="city-country">United Kingdom</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <div class="city-name">Dubai</div>
+                    <div class="city-country">UAE</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="city-name">Singapore</div>
+                    <div class="city-country">Singapore</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-icon">
+                        <i class="fas fa-torii-gate"></i>
+                    </div>
+                    <div class="city-name">Tokyo</div>
+                    <div class="city-country">Japan</div>
+                </div>
+            </div>
+            
+            <div class="global-description">
+                <p>Our international network of luxury real estate specialists ensures seamless transactions across borders, providing you with expert guidance in every market we serve.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Ready to <strong>Begin Your Journey?</strong></h2>
+                <p>Connect with our team of luxury real estate experts today and discover how we can help you find your dream property or achieve exceptional results in selling your current home.</p>
+                <button class="cta-btn">Get Started Today</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxEstate</h3>
+                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="agents.html">Our Agents</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Property Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Luxury Homes</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Penthouses</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Condos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 LuxEstate. All rights reserved.
+                </div>
+                <ul class="footer-links-horizontal">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact button functionality
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        });
+        
+        // CTA button functionality
+        document.querySelector('.cta-btn').addEventListener('click', function() {
+            alert('Starting your luxury real estate journey...\n\nOur team will contact you within 24 hours to discuss your needs and preferences.');
+        });
+        
+        // City cards hover effect enhancement
+        document.querySelectorAll('.city-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const cityName = this.querySelector('.city-name').textContent;
+                this.style.cursor = 'pointer';
+            });
+            
+            card.addEventListener('click', function() {
+                const cityName = this.querySelector('.city-name').textContent;
+                alert(`Exploring properties in ${cityName}...\n\nOur ${cityName} office specializes in luxury properties in this market. Contact us for personalized assistance.`);
+            });
+        });
+        
+        // Stat cards animation
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const statNumber = this.querySelector('.stat-number').textContent;
+                const statLabel = this.querySelector('.stat-label').textContent;
+            });
+        });
+    </script>
+</body>
+</html>

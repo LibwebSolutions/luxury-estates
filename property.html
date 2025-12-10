@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings | LuxEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c19a6b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c19a6b;
+        }
+
+        .nav-links a.active {
+            color: #c19a6b;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .page-header h1 strong {
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #eee;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            gap: 40px;
+            padding: 40px 0 80px;
+        }
+
+        /* Sidebar - Filters */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .filters-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .filters-card h2 {
+            font-size: 24px;
+            color: #1a3c5e;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-group h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #c19a6b;
+        }
+
+        .filter-option label {
+            color: #555;
+            cursor: pointer;
+        }
+
+        .price-range {
+            width: 100%;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .price-inputs input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .apply-filters {
+            width: 100%;
+            background-color: #c19a6b;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .apply-filters:hover {
+            background-color: #b08a5b;
+        }
+
+        .results-count {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            font-size: 18px;
+            color: #1a3c5e;
+            font-weight: 600;
+        }
+
+        .results-count span {
+            color: #c19a6b;
+        }
+
+        /* Property Listings */
+        .listings-container {
+            flex: 1;
+        }
+
+        .listings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .listings-header h2 {
+            font-size: 32px;
+            color: #1a3c5e;
+        }
+
+        .sort-options select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .properties-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .property-listing {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .property-listing:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .property-image {
+            width: 300px;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .property-details {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .property-title {
+            font-size: 24px;
+            color: #1a3c5e;
+            margin-bottom: 10px;
+        }
+
+        .property-location {
+            color: #c19a6b;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .property-features {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature i {
+            color: #c19a6b;
+            font-size: 18px;
+        }
+
+        .property-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .property-price {
+            font-size: 28px;
+            color: #1a3c5e;
+            font-weight: 700;
+        }
+
+        .property-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .property-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination-btn.active {
+            background-color: #1a3c5e;
+            color: white;
+            border-color: #1a3c5e;
+        }
+
+        .pagination-btn.prev-next {
+            width: auto;
+            padding: 0 20px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #c19a6b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c19a6b;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: #c19a6b;
+            margin-top: 4px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .property-listing {
+                flex-direction: column;
+            }
+            
+            .property-image {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .page-header p {
+                font-size: 18px;
+            }
+            
+            .listings-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .property-features {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .property-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Lux<span>Estate</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="property.html" class="active">Properties</a></li>
+                    <li><a href="agent.html">Agents</a></li>
+                    <li><a href="about.html"></a></li>
+                    <li><a href="contact.htmlsss">Contact</a></li>
+                </ul>
+                <button class="contact-btn">Contact Us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Premium <strong>Property Listings</strong></h1>
+            <p>Discover our curated collection of luxury properties worldwide</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar with Filters -->
+            <aside class="sidebar">
+                <div class="filters-card">
+                    <h2>Filters</h2>
+                    
+                    <div class="filter-group">
+                        <h3>Property Type</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="type-mansion" checked>
+                                <label for="type-mansion">Mansion</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="type-penthouse" checked>
+                                <label for="type-penthouse">Penthouse</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="type-villa" checked>
+                                <label for="type-villa">Villa</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="type-condo" checked>
+                                <label for="type-condo">Condo</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="type-apartment" checked>
+                                <label for="type-apartment">Apartment</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Price Range</h3>
+                        <input type="range" min="0" max="10000000" value="10000000" class="price-range">
+                        <div class="price-inputs">
+                            <input type="text" placeholder="Min" value="$0">
+                            <input type="text" placeholder="Max" value="$10M+">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Location</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="location-ca" checked>
+                                <label for="location-ca">California</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="location-ny" checked>
+                                <label for="location-ny">New York</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="location-fl" checked>
+                                <label for="location-fl">Florida</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="location-il" checked>
+                                <label for="location-il">Illinois</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="location-wa" checked>
+                                <label for="location-wa">Washington</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h3>Bedrooms</h3>
+                        <div class="filter-options">
+                            <div class="filter-option">
+                                <input type="checkbox" id="beds-3plus">
+                                <label for="beds-3plus">3+</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="beds-4plus" checked>
+                                <label for="beds-4plus">4+</label>
+                            </div>
+                            <div class="filter-option">
+                                <input type="checkbox" id="beds-5plus" checked>
+                                <label for="beds-5plus">5+</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="apply-filters">Apply Filters</button>
+                </div>
+                
+                <div class="results-count">
+                    <span>8</span> properties found
+                </div>
+            </aside>
+            
+            <!-- Property Listings -->
+            <main class="listings-container">
+                <div class="listings-header">
+                    <h2>All Properties</h2>
+                    <div class="sort-options">
+                        <select>
+                            <option>Price: High to Low</option>
+                            <option>Price: Low to High</option>
+                            <option>Newest First</option>
+                            <option>Square Feet: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="properties-list">
+                    <!-- Property 1 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Luxury Modern Mansion</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Beverly Hills, CA
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>6 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>7 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>8,500 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Stunning contemporary mansion with panoramic views, state-of-the-art amenities, and luxurious finishes throughout.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$4,500,000</div>
+<button class="property-btn" onclick="window.location.href='property1.html'">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 2 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Contemporary Glass House</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Malibu, CA
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>5 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>5 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>6,800 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Architectural masterpiece with floor-to-ceiling windows offering breathtaking ocean views from every room.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$3,200,000</div>
+<button class="property-btn" onclick="window.location.href='property2.html'">View Details</button>                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 3 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Downtown Luxury Penthouse</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Manhattan, NY
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>4 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>4 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>4,200 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Exclusive penthouse with private rooftop terrace, panoramic city views, and premium finishes throughout.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$2,800,000</div>
+<button class="property-btn" onclick="window.location.href='property3.html'">View Details</button>                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 4 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Mediterranean Villa</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Miami Beach, FL
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>7 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>8 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>9,500 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Lavish Mediterranean-style villa with private beach access, infinity pool, and lush tropical gardens.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$5,200,000</div>
+                                <button class="property-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 5 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Skyline Luxury Condo</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Chicago, IL
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>3 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>3 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>3,100 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Sophisticated high-rise condo with breathtaking city views, gourmet kitchen, and premium building amenities.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$1,850,000</div>
+                                <button class="property-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 6 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1967&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Hollywood Hills Retreat</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Hollywood Hills, CA
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>5 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>6 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>7,200 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Secluded modern retreat with panoramic city views, infinity pool, and state-of-the-art entertainment systems.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$3,950,000</div>
+                                <button class="property-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 7 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Modern Urban Apartment</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Downtown Seattle, WA
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>3 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>3 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>2,400 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Chic urban apartment with premium finishes, smart home technology, and stunning skyline views.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$1,200,000</div>
+                                <button class="property-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 8 -->
+                    <div class="property-listing">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-details">
+                            <h3 class="property-title">Beachfront Paradise</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Hamptons, NY
+                            </div>
+                            <div class="property-features">
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i>
+                                    <span>8 Bedrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bath"></i>
+                                    <span>9 Bathrooms</span>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>11,000 sq ft</span>
+                                </div>
+                            </div>
+                            <p class="property-description">Magnificent beachfront estate with private beach access, tennis court, and expansive outdoor living spaces.</p>
+                            <div class="property-footer">
+                                <div class="property-price">$6,800,000</div>
+                                <button class="property-btn">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn prev-next">Previous</button>
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn prev-next">Next</button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxEstate</h3>
+                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every property we represent.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="properties.html">Properties</a></li>
+                        <li><a href="#">Agents</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Property Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Luxury Homes</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Condos</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Estates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 LuxEstate. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        document.querySelector('.apply-filters').addEventListener('click', function() {
+            const checkedTypes = Array.from(document.querySelectorAll('.filter-option input[type="checkbox"]:checked'))
+                .map(cb => cb.nextElementSibling.textContent);
+            
+            alert(`Applied filters for: ${checkedTypes.join(', ')}`);
+        });
+        
+        // Property button functionality
+        document.querySelectorAll('.property-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const propertyTitle = this.closest('.property-listing').querySelector('.property-title').textContent;
+                alert(`Thank you for your interest in "${propertyTitle}". A luxury specialist will contact you shortly.`);
+            });
+        });
+        
+        // Pagination functionality
+        document.querySelectorAll('.pagination-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.textContent === 'Previous' || this.textContent === 'Next') {
+                    alert(`Navigating to ${this.textContent} page`);
+                } else if(!this.classList.contains('active')) {
+                    document.querySelector('.pagination-btn.active').classList.remove('active');
+                    this.classList.add('active');
+                }
+            });
+        });
+        
+        // Sort functionality
+        document.querySelector('.sort-options select').addEventListener('change', function() {
+            alert(`Sorting properties by: ${this.value}`);
+        });
+        
+        // Contact button
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Connecting you with a luxury real estate specialist...');
+        });
+    </script>
+</body>
+</html>

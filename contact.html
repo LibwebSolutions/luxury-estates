@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | LuxEstate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a3c5e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #c19a6b;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c19a6b;
+        }
+
+        .nav-links a.active {
+            color: #c19a6b;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .page-header h1 strong {
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #eee;
+        }
+
+        /* Contact Content */
+        .contact-content {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            flex: 1;
+        }
+
+        .info-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .info-card h2 {
+            font-size: 28px;
+            color: #1a3c5e;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c19a6b;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 18px;
+            color: #1a3c5e;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            color: #666;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list .day {
+            font-weight: 500;
+        }
+
+        .hours-list .closed {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: #1a3c5e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: #c19a6b;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-card h2 {
+            font-size: 28px;
+            color: #1a3c5e;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group label.required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c19a6b;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .submit-btn {
+            background-color: #c19a6b;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #b08a5b;
+        }
+
+        /* Location Section */
+        .location-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: #1a3c5e;
+            margin-bottom: 15px;
+        }
+
+        .location-content {
+            display: flex;
+            gap: 40px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .map-container {
+            flex: 1;
+            min-height: 400px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #1a3c5e;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .map-placeholder i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #c19a6b;
+        }
+
+        .map-placeholder h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .map-placeholder p {
+            color: #666;
+            max-width: 300px;
+        }
+
+        .view-map-btn {
+            background-color: #1a3c5e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .view-map-btn:hover {
+            background-color: #c19a6b;
+        }
+
+        .nearby-locations {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .nearby-locations h3 {
+            font-size: 24px;
+            color: #1a3c5e;
+            margin-bottom: 25px;
+        }
+
+        .location-list {
+            list-style: none;
+        }
+
+        .location-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        .location-list li:last-child {
+            border-bottom: none;
+        }
+
+        .location-list .location-name {
+            font-weight: 600;
+            color: #1a3c5e;
+            margin-bottom: 5px;
+        }
+
+        .location-list .location-address {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Nearby Places Grid */
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .place-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #c19a6b;
+        }
+
+        .place-item h4 {
+            color: #1a3c5e;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .place-item p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Follow Us Section */
+        .follow-section {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 80px;
+            border-radius: 15px;
+        }
+
+        .follow-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .follow-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .follow-content h2 strong {
+            font-weight: 700;
+        }
+
+        .follow-content p {
+            font-size: 18px;
+            color: #ddd;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .follow-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .follow-social .social-link {
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a3c5e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #c19a6b;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #c19a6b;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: #c19a6b;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links-horizontal {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .footer-links-horizontal a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links-horizontal a:hover {
+            color: #c19a6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .contact-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .location-content {
+                flex-direction: column;
+            }
+            
+            .map-container {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 36px;
+            }
+            
+            .page-header p {
+                font-size: 18px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .places-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .follow-social {
+                flex-wrap: wrap;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .places-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-card, .form-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Lux<span>Estate</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="agents.html">Our Agents</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+                <button class="contact-btn">Contact Us</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact <strong>LuxEstate</strong></h1>
+            <p>Get in touch with our team of luxury real estate specialists and let's make your property dreams a reality.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="container">
+        <div class="contact-content">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <h2>Visit Us</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Main Office</h3>
+                            <p>123 Luxury Avenue<br>Beverly Hills, CA 90210<br>United States</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h2>Contact Details</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Call Us</h3>
+                            <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email Us</h3>
+                            <p>info@luxestate.com<br>support@luxestate.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h2>Office Hours</h2>
+                    <ul class="hours-list">
+                        <li>
+                            <span class="day">Monday - Friday</span>
+                            <span>9:00 AM - 6:00 PM</span>
+                        </li>
+                        <li>
+                            <span class="day">Saturday</span>
+                            <span>10:00 AM - 4:00 PM</span>
+                        </li>
+                        <li>
+                            <span class="day">Sunday</span>
+                            <span class="closed">Closed</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <div class="form-card">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" class="required">Name</label>
+                                <input type="text" id="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="required">Email</label>
+                                <input type="email" id="email" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="required">Subject</label>
+                                <select id="subject" required>
+                                    <option value="" disabled selected>Select a subject</option>
+                                    <option value="buying">Buying a Property</option>
+                                    <option value="selling">Selling a Property</option>
+                                    <option value="valuation">Property Valuation</option>
+                                    <option value="viewing">Schedule a Viewing</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="required">Message</label>
+                            <textarea id="message" placeholder="Tell us about your needs..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Section -->
+    <section class="location-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Location</h2>
+            </div>
+            
+            <div class="location-content">
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Beverly Hills Office</h3>
+                        <p>123 Luxury Avenue, Beverly Hills, CA 90210</p>
+                        <button class="view-map-btn">View Larger Map</button>
+                    </div>
+                </div>
+                
+                <div class="nearby-locations">
+                    <h3>Nearby Locations</h3>
+                    <ul class="location-list">
+                        <li>
+                            <div class="location-name">Virginia Robinson Gardens</div>
+                            <div class="location-address">Benedict Canyon</div>
+                        </li>
+                        <li>
+                            <div class="location-name">The Beverly Hills Hotel</div>
+                            <div class="location-address">Sunset Boulevard</div>
+                        </li>
+                        <li>
+                            <div class="location-name">Greystone Mansion & Gardens</div>
+                            <div class="location-address">Coldwater Canyon Park</div>
+                        </li>
+                        <li>
+                            <div class="location-name">The Butcher, The Baker, The Cappuccino Maker</div>
+                            <div class="location-address">Sunset Boulevard</div>
+                        </li>
+                        <li>
+                            <div class="location-name">The Paul Smith Pink Wall</div>
+                            <div class="location-address">West Hollywood Park</div>
+                        </li>
+                        <li>
+                            <div class="location-name">Wattles Garden Park</div>
+                            <div class="location-address">Hollywood Boulevard</div>
+                        </li>
+                        <li>
+                            <div class="location-name">Plummer Park</div>
+                            <div class="location-address">North Vista Avenue</div>
+                        </li>
+                        <li>
+                            <div class="location-name">In-N-Out Burger</div>
+                            <div class="location-address">Sunset Boulevard</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Follow Us Section -->
+    <section class="container">
+        <div class="follow-section">
+            <div class="follow-content">
+                <h2>Follow <strong>Our Journey</strong></h2>
+                <p>Stay updated with our latest properties, market insights, and luxury real estate news. Follow us on social media to join our community of luxury property enthusiasts.</p>
+                
+                <div class="follow-social">
+                    <a href="#" class="social-link" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-link" title="Pinterest">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>LuxEstate</h3>
+                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="property.html">Properties</a></li>
+                        <li><a href="agent.html">Our Agents</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Property Types</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Luxury Homes</a></li>
+                        <li><a href="#">Apartments</a></li>
+                        <li><a href="#">Penthouses</a></li>
+                        <li><a href="#">Villas</a></li>
+                        <li><a href="#">Condos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 LuxEstate. All rights reserved.
+                </div>
+                <ul class="footer-links-horizontal">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For this demo, we'll just show a confirmation message
+            alert(`Thank you for your message, ${name}!\n\nWe have received your inquiry regarding "${subject}". Our team will contact you at ${email} within 24 hours.\n\nMessage: ${message}`);
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // View larger map button
+        document.querySelector('.view-map-btn').addEventListener('click', function() {
+            alert('Opening Google Maps with our location...\n\nAddress: 123 Luxury Avenue, Beverly Hills, CA 90210');
+        });
+        
+        // Header contact button
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        });
+        
+        // Social media links
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const platform = this.getAttribute('title');
+                alert(`Opening ${platform} page in a new window...\n\nFollow us on ${platform} for the latest luxury property updates.`);
+            });
+        });
+        
+        // Nearby locations interaction
+        document.querySelectorAll('.location-list li').forEach(item => {
+            item.addEventListener('click', function() {
+                const locationName = this.querySelector('.location-name').textContent;
+                const locationAddress = this.querySelector('.location-address').textContent;
+                alert(`Location: ${locationName}\nAddress: ${locationAddress}\n\nWould you like directions to this location?`);
+            });
+            
+            item.style.cursor = 'pointer';
+        });
+    </script>
+</body>
+</html>
