@@ -3,129 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarah Mitchell | LuxEstate</title>
+    <title>Sarah Mitchell | Luxury Estates</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* --- Reset & Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background-color: #f5f5f5; color: #333; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- Header & Navigation --- */
+        header { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px); background-color: rgba(255,255,255,0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: 0.3s; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: #1a3c5e; letter-spacing: 1px; }
+        .logo span { color: #c19a6b; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { font-weight: 500; position: relative; padding:5px 0; }
+        .nav-links a::after { content:""; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:#c19a6b; transition:0.3s; }
+        .nav-links a:hover::after { width:100%; }
+        .nav-links a.active { color: #c19a6b; }
+        .contact-btn { background: linear-gradient(45deg,#c19a6b,#b08a5b); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .contact-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        /* --- Hamburger --- */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; background:none; border:none; z-index:1010; }
+        .hamburger span { width: 25px; height: 3px; background-color: #1a3c5e; margin: 4px 0; border-radius: 2px; transition: 0.4s; }
+
+        /* --- Page Header --- */
+        .agent-header {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            position: relative;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
         }
 
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
+        .agent-header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
             padding: 0 20px;
         }
 
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a3c5e;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: #c19a6b;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #c19a6b;
-        }
-
-        .nav-links a.active {
-            color: #c19a6b;
-            font-weight: 600;
-        }
-
-        .contact-btn {
-            background-color: #1a3c5e;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .contact-btn:hover {
-            background-color: #c19a6b;
-        }
-
-        /* Agent Header */
-        .agent-header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 0;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
         .agent-header h1 {
+            font-family: 'Playfair Display', serif;
             font-size: 48px;
-            margin-bottom: 15px;
-            font-weight: 300;
-        }
-
-        .agent-header h1 strong {
+            margin-bottom: 20px;
             font-weight: 700;
+            line-height: 1.2;
         }
 
         .agent-header p {
             font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-            color: #eee;
+            color: #f0f0f0;
+            margin-bottom: 30px;
         }
 
-        /* Agent Profile */
+        /* --- Agent Profile --- */
         .agent-profile {
             display: flex;
-            gap: 60px;
-            margin-bottom: 80px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.3s;
         }
 
+        /* --- Agent Sidebar --- */
         .agent-sidebar {
             width: 350px;
             flex-shrink: 0;
@@ -135,58 +90,82 @@
             flex: 1;
         }
 
-        /* Agent Card */
+        /* --- Agent Card --- */
         .agent-card {
-            background-color: white;
-            border-radius: 15px;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             margin-bottom: 30px;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
         }
 
         .agent-photo {
             height: 300px;
-            background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1961&q=80');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1961&q=80') center/cover no-repeat;
             position: relative;
+            overflow: hidden;
+        }
+
+        .agent-photo::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);
         }
 
         .agent-badge {
             position: absolute;
             top: 20px;
             right: 0;
-            background-color: #c19a6b;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
             color: white;
             padding: 8px 20px;
             font-size: 16px;
             font-weight: 600;
             border-radius: 5px 0 0 5px;
+            z-index: 2;
         }
 
         .agent-info {
-            padding: 40px;
+            padding: 30px;
         }
 
         .agent-name {
             font-size: 32px;
             color: #1a3c5e;
             margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
         }
 
         .agent-title {
             color: #c19a6b;
             font-size: 18px;
             font-weight: 500;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
+        /* --- Stats --- */
         .agent-stats {
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             padding: 25px;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+
+        .agent-stats:hover {
+            transform: translateY(-5px);
         }
 
         .properties-sold {
@@ -194,6 +173,7 @@
             font-weight: 700;
             color: #1a3c5e;
             margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
         }
 
         .properties-label {
@@ -203,23 +183,26 @@
             letter-spacing: 1px;
         }
 
+        /* --- Contact Info --- */
         .agent-contact {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding: 15px;
             background-color: #f8f9fa;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
         .contact-item:hover {
             background-color: #f0f0f0;
+            transform: translateX(5px);
         }
 
         .contact-item i {
@@ -239,30 +222,42 @@
             font-weight: 500;
         }
 
+        /* --- Buttons --- */
         .contact-btn-large {
             width: 100%;
-            background-color: #1a3c5e;
+            background: linear-gradient(45deg,#1a3c5e,#2d4f7a);
             color: white;
             border: none;
-            padding: 16px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .contact-btn-large:hover {
-            background-color: #c19a6b;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(193, 154, 107, 0.2);
         }
 
-        /* Agent Bio */
+        /* --- Bio Section --- */
         .bio-section {
-            background-color: white;
+            background: white;
             padding: 40px;
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             margin-bottom: 40px;
+            transition: transform 0.4s;
+        }
+
+        .bio-section:hover {
+            transform: translateY(-5px);
         }
 
         .section-title {
@@ -270,7 +265,8 @@
             color: #1a3c5e;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #f0f0f0;
+            font-family: 'Playfair Display', serif;
         }
 
         .bio-content p {
@@ -289,9 +285,14 @@
 
         .bio-stat {
             text-align: center;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .bio-stat:hover {
+            transform: translateY(-5px);
         }
 
         .bio-stat-value {
@@ -299,6 +300,7 @@
             font-weight: 700;
             color: #c19a6b;
             margin-bottom: 5px;
+            font-family: 'Playfair Display', serif;
         }
 
         .bio-stat-label {
@@ -308,9 +310,12 @@
             letter-spacing: 1px;
         }
 
-        /* Featured Properties */
+        /* --- Featured Properties --- */
         .properties-section {
-            margin-bottom: 80px;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
         }
 
         .section-header {
@@ -318,29 +323,34 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .section-header h2 {
             font-size: 32px;
             color: #1a3c5e;
+            font-family: 'Playfair Display', serif;
         }
 
         .view-all {
-            background-color: transparent;
+            background: transparent;
             color: #c19a6b;
             border: 2px solid #c19a6b;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .view-all:hover {
-            background-color: #c19a6b;
+            background: #c19a6b;
             color: white;
+            transform: translateY(-2px);
         }
 
+        /* Properties Grid */
         .properties-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -348,45 +358,75 @@
         }
 
         .property-card {
-            background-color: white;
-            border-radius: 10px;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            cursor: pointer;
         }
 
         .property-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+
+        .property-card::after {
+            content:"";
+            position:absolute;
+            inset:0;
+            background:linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 60%, rgba(0,0,0,0.1) 100%);
+            z-index:0;
         }
 
         .property-card-img {
             height: 200px;
             background-size: cover;
             background-position: center;
+            transition: transform 0.5s;
+            border-bottom: 1px solid #eee;
+        }
+
+        .property-card:hover .property-card-img {
+            transform: scale(1.05);
         }
 
         .property-card-info {
             padding: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .property-card-title {
             font-size: 20px;
             color: #1a3c5e;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .property-card-location {
             color: #c19a6b;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .property-card-features {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
-            color: #666;
-            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .property-card-features span {
+            text-align: center;
+            flex: 1;
+            font-weight: 600;
+            color: #333;
         }
 
         .property-card-price {
@@ -398,27 +438,31 @@
 
         .property-card-btn {
             width: 100%;
-            background-color: #1a3c5e;
+            background: linear-gradient(45deg,#1a3c5e,#2d4f7a);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 14px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .property-card-btn:hover {
-            background-color: #c19a6b;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
+            transform: translateY(-2px);
         }
 
-        /* Testimonials */
+        /* --- Testimonials --- */
         .testimonials-section {
-            background-color: #1a3c5e;
+            background: linear-gradient(135deg, #1a3c5e 0%, #2d4f7a 100%);
             color: white;
-            padding: 60px;
-            border-radius: 15px;
-            margin-bottom: 80px;
+            padding: 50px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.7s;
         }
 
         .testimonials-section .section-title {
@@ -428,10 +472,16 @@
         }
 
         .testimonial-card {
-            background-color: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1);
             padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
         }
 
         .testimonial-text {
@@ -450,13 +500,15 @@
         .author-avatar {
             width: 50px;
             height: 50px;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
+            color: white;
             border-radius: 50%;
-            background-color: #c19a6b;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
             font-size: 20px;
+            flex-shrink: 0;
         }
 
         .author-info h4 {
@@ -469,25 +521,34 @@
             font-size: 14px;
         }
 
-        /* Contact CTA */
+        /* --- Contact CTA --- */
         .contact-cta {
             text-align: center;
             margin-bottom: 80px;
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            animation-delay: 0.9s;
         }
 
         .cta-card {
-            background-color: white;
+            background: white;
             padding: 60px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             max-width: 800px;
             margin: 0 auto;
+            transition: transform 0.4s;
+        }
+
+        .cta-card:hover {
+            transform: translateY(-10px);
         }
 
         .cta-card h2 {
             font-size: 36px;
             color: #1a3c5e;
             margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
         }
 
         .cta-card p {
@@ -501,30 +562,36 @@
             display: flex;
             gap: 20px;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .cta-btn-primary {
-            background-color: #c19a6b;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
             color: white;
             border: none;
             padding: 16px 40px;
-            border-radius: 8px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .cta-btn-primary:hover {
-            background-color: #b08a5b;
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(193, 154, 107, 0.2);
         }
 
         .cta-btn-secondary {
-            background-color: transparent;
+            background: transparent;
             color: #1a3c5e;
             border: 2px solid #1a3c5e;
             padding: 16px 40px;
-            border-radius: 8px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
@@ -532,15 +599,16 @@
         }
 
         .cta-btn-secondary:hover {
-            background-color: #1a3c5e;
+            background: #1a3c5e;
             color: white;
+            transform: translateY(-2px);
         }
 
-        /* Footer */
+        /* --- Footer --- */
         footer {
-            background-color: #1a3c5e;
+            background: #1a3c5e;
             color: white;
-            padding: 60px 0 30px;
+            padding: 60px 20px 30px;
         }
 
         .footer-content {
@@ -548,7 +616,8 @@
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 40px;
-            margin-bottom: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
         }
 
         .footer-column {
@@ -560,6 +629,7 @@
             font-size: 20px;
             margin-bottom: 25px;
             color: #c19a6b;
+            font-family: 'Playfair Display', serif;
         }
 
         .footer-links {
@@ -568,6 +638,11 @@
 
         .footer-links li {
             margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
         }
 
         .footer-links a {
@@ -585,6 +660,7 @@
             align-items: flex-start;
             gap: 10px;
             margin-bottom: 15px;
+            color: #ddd;
         }
 
         .footer-contact i {
@@ -602,6 +678,8 @@
             font-size: 14px;
             flex-wrap: wrap;
             gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .footer-links-horizontal {
@@ -620,7 +698,18 @@
             color: #c19a6b;
         }
 
-        /* Responsive */
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            0% { opacity:0; transform: translateY(30px);}
+            100% { opacity:1; transform: translateY(0);}
+        }
+
+        @keyframes fadeIn {
+            0% { opacity:0; }
+            100% { opacity:1; }
+        }
+
+        /* --- Responsive --- */
         @media (max-width: 1024px) {
             .agent-profile {
                 flex-direction: column;
@@ -640,8 +729,51 @@
         }
 
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                border-top: 1px solid #eee;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 15px 0;
+                border-bottom: 1px solid #f0f0f0;
+                font-size: 17px;
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+            
+            nav .contact-btn.desktop-contact-btn {
+                display: none;
+            }
+            
+            .nav-links .mobile-contact-btn {
+                display: block;
+                margin-top: 15px;
+                text-align: center;
             }
             
             .agent-header h1 {
@@ -680,305 +812,447 @@
                 gap: 15px;
             }
         }
+
+        @media (max-width: 480px) {
+            .agent-header h1 {
+                font-size: 32px;
+            }
+            
+            .agent-header p {
+                font-size: 16px;
+            }
+            
+            .agent-info, .bio-section, .cta-card {
+                padding: 25px 20px;
+            }
+            
+            .testimonials-section {
+                padding: 30px 20px;
+            }
+        }
+
+        /* --- Hamburger Animation --- */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Lux<span>Estate</span></a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="properties.html">Properties</a></li>
-                    <li><a href="agents.html">Our Agents</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <button class="contact-btn">Contact Us</button>
-            </nav>
-        </div>
+        <nav>
+            <a href="index.html" class="logo">Luxury<span>Estates</span></a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-contact-btn">
+                    <button class="contact-btn" style="width:100%;">Contact Us</button>
+                </li>
+            </ul>
+            <button class="contact-btn desktop-contact-btn">Contact Us</button>
+        </nav>
     </header>
 
     <!-- Agent Header -->
     <section class="agent-header">
-        <div class="container">
+        <div class="agent-header-content">
             <h1>Meet <strong>Sarah Mitchell</strong></h1>
             <p>Senior Real Estate Agent with 15+ years of experience in luxury properties</p>
         </div>
     </section>
 
     <!-- Agent Profile -->
-    <div class="container">
-        <div class="agent-profile">
-            <!-- Sidebar -->
-            <div class="agent-sidebar">
-                <div class="agent-card">
-                    <div class="agent-photo">
-                        <div class="agent-badge">Senior Agent</div>
+    <div class="agent-profile">
+        <!-- Sidebar -->
+        <div class="agent-sidebar">
+            <div class="agent-card">
+                <div class="agent-photo">
+                    <div class="agent-badge">Senior Agent</div>
+                </div>
+                <div class="agent-info">
+                    <h2 class="agent-name">Sarah Mitchell</h2>
+                    <div class="agent-title">Senior Real Estate Agent</div>
+                    
+                    <div class="agent-stats">
+                        <div class="properties-sold">47</div>
+                        <div class="properties-label">Properties Sold</div>
                     </div>
-                    <div class="agent-info">
-                        <h2 class="agent-name">Sarah Mitchell</h2>
-                        <div class="agent-title">Senior Real Estate Agent</div>
-                        
-                        <div class="agent-stats">
-                            <div class="properties-sold">47</div>
-                            <div class="properties-label">Properties Sold</div>
-                        </div>
-                        
-                        <div class="agent-contact">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <div class="contact-details">
-                                    <h4>Email</h4>
-                                    <p>sarah.mitchell@luxestate.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <div class="contact-details">
-                                    <h4>Phone</h4>
-                                    <p>+1 (555) 123-4567</p>
-                                </div>
-                            </div>
-                            
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="contact-details">
-                                    <h4>Office</h4>
-                                    <p>Beverly Hills, CA</p>
-                                </div>
+                    
+                    <div class="agent-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>sarah.mitchell@luxuryestates.com</p>
                             </div>
                         </div>
                         
-                        <button class="contact-btn-large" id="contactAgentBtn">Contact Sarah</button>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="contact-details">
+                                <h4>Office</h4>
+                                <p>Beverly Hills, CA</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="contact-btn-large" id="contactAgentBtn">
+                        <i class="fas fa-paper-plane"></i> Contact Sarah
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="agent-main">
+            <!-- Bio Section -->
+            <div class="bio-section">
+                <h2 class="section-title">Professional Bio</h2>
+                <div class="bio-content">
+                    <p>Sarah Mitchell is a Senior Real Estate Agent with over 15 years of experience specializing in luxury properties in Beverly Hills, Los Angeles, and surrounding affluent communities. Her extensive market knowledge and dedication to client service have established her as one of the top-performing agents in Southern California.</p>
+                    
+                    <p>With 47 properties sold and over $250 million in total sales volume, Sarah combines strategic marketing, expert negotiation skills, and personalized service to achieve exceptional results for her clients. Her portfolio includes some of the most prestigious estates and luxury residences in the region.</p>
+                    
+                    <p>Sarah's approach is built on three core principles: market expertise, personalized service, and unwavering integrity. She believes that buying or selling a luxury property should be an exciting and seamless experience, and she works tirelessly to ensure every client receives the highest level of professional service.</p>
+                    
+                    <div class="bio-stats">
+                        <div class="bio-stat">
+                            <div class="bio-stat-value">15+</div>
+                            <div class="bio-stat-label">Years Experience</div>
+                        </div>
+                        <div class="bio-stat">
+                            <div class="bio-stat-value">$250M+</div>
+                            <div class="bio-stat-label">Sales Volume</div>
+                        </div>
+                        <div class="bio-stat">
+                            <div class="bio-stat-value">98%</div>
+                            <div class="bio-stat-label">Client Satisfaction</div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Main Content -->
-            <div class="agent-main">
-                <!-- Bio Section -->
-                <div class="bio-section">
-                    <h2 class="section-title">Professional Bio</h2>
-                    <div class="bio-content">
-                        <p>Sarah Mitchell is a Senior Real Estate Agent with over 15 years of experience specializing in luxury properties in Beverly Hills, Los Angeles, and surrounding affluent communities. Her extensive market knowledge and dedication to client service have established her as one of the top-performing agents in Southern California.</p>
-                        
-                        <p>With 47 properties sold and over $250 million in total sales volume, Sarah combines strategic marketing, expert negotiation skills, and personalized service to achieve exceptional results for her clients. Her portfolio includes some of the most prestigious estates and luxury residences in the region.</p>
-                        
-                        <p>Sarah's approach is built on three core principles: market expertise, personalized service, and unwavering integrity. She believes that buying or selling a luxury property should be an exciting and seamless experience, and she works tirelessly to ensure every client receives the highest level of professional service.</p>
-                        
-                        <div class="bio-stats">
-                            <div class="bio-stat">
-                                <div class="bio-stat-value">15+</div>
-                                <div class="bio-stat-label">Years Experience</div>
+            <!-- Featured Properties -->
+            <div class="properties-section">
+                <div class="section-header">
+                    <h2>Recently Sold Properties</h2>
+                    <button class="view-all" onclick="window.location.href='properties.html'">
+                        <i class="fas fa-eye"></i> View All Properties
+                    </button>
+                </div>
+                
+                <div class="properties-grid">
+                    <!-- Property 1 -->
+                    <div class="property-card">
+                        <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                        <div class="property-card-info">
+                            <h3 class="property-card-title">Luxury Modern Mansion</h3>
+                            <div class="property-card-location"><i class="fas fa-map-marker-alt"></i> Beverly Hills, CA</div>
+                            <div class="property-card-features">
+                                <span>6 Beds</span>
+                                <span>7 Baths</span>
+                                <span>8,500 sq ft</span>
                             </div>
-                            <div class="bio-stat">
-                                <div class="bio-stat-value">$250M+</div>
-                                <div class="bio-stat-label">Sales Volume</div>
+                            <div class="property-card-price">$4,500,000</div>
+                            <button class="property-card-btn" onclick="window.location.href='property1.html'">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 2 -->
+                    <div class="property-card">
+                        <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');"></div>
+                        <div class="property-card-info">
+                            <h3 class="property-card-title">Hollywood Hills Estate</h3>
+                            <div class="property-card-location"><i class="fas fa-map-marker-alt"></i> Hollywood Hills, CA</div>
+                            <div class="property-card-features">
+                                <span>5 Beds</span>
+                                <span>6 Baths</span>
+                                <span>7,200 sq ft</span>
                             </div>
-                            <div class="bio-stat">
-                                <div class="bio-stat-value">98%</div>
-                                <div class="bio-stat-label">Client Satisfaction</div>
+                            <div class="property-card-price">$3,950,000</div>
+                            <button class="property-card-btn">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property 3 -->
+                    <div class="property-card">
+                        <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
+                        <div class="property-card-info">
+                            <h3 class="property-card-title">Bel Air Contemporary</h3>
+                            <div class="property-card-location"><i class="fas fa-map-marker-alt"></i> Bel Air, CA</div>
+                            <div class="property-card-features">
+                                <span>7 Beds</span>
+                                <span>8 Baths</span>
+                                <span>9,500 sq ft</span>
                             </div>
+                            <div class="property-card-price">$5,200,000</div>
+                            <button class="property-card-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="testimonials-section">
+                <h2 class="section-title">Client Testimonials</h2>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Sarah made the entire process of selling our family home seamless. Her market knowledge and negotiation skills resulted in a sale price that exceeded our expectations. We couldn't have asked for a better agent!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JR</div>
+                        <div class="author-info">
+                            <h4>James & Rebecca Thompson</h4>
+                            <p>Sold their Beverly Hills estate</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Featured Properties -->
-                <div class="properties-section">
-                    <div class="section-header">
-                        <h2>Recently Sold Properties</h2>
-                        <button class="view-all" onclick="window.location.href='properties.html'">View All Properties</button>
-                    </div>
-                    
-                    <div class="properties-grid">
-                        <!-- Property 1 -->
-                        <div class="property-card">
-                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                            <div class="property-card-info">
-                                <h3 class="property-card-title">Luxury Modern Mansion</h3>
-                                <div class="property-card-location">Beverly Hills, CA</div>
-                                <div class="property-card-features">
-                                    <span>6 Beds</span>
-                                    <span>7 Baths</span>
-                                    <span>8,500 sq ft</span>
-                                </div>
-                                <div class="property-card-price">$4,500,000</div>
-                                <button class="property-card-btn" onclick="window.location.href='property1.html'">View Details</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Property 2 -->
-                        <div class="property-card">
-                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');"></div>
-                            <div class="property-card-info">
-                                <h3 class="property-card-title">Hollywood Hills Estate</h3>
-                                <div class="property-card-location">Hollywood Hills, CA</div>
-                                <div class="property-card-features">
-                                    <span>5 Beds</span>
-                                    <span>6 Baths</span>
-                                    <span>7,200 sq ft</span>
-                                </div>
-                                <div class="property-card-price">$3,950,000</div>
-                                <button class="property-card-btn">View Details</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Property 3 -->
-                        <div class="property-card">
-                            <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
-                            <div class="property-card-info">
-                                <h3 class="property-card-title">Bel Air Contemporary</h3>
-                                <div class="property-card-location">Bel Air, CA</div>
-                                <div class="property-card-features">
-                                    <span>7 Beds</span>
-                                    <span>8 Baths</span>
-                                    <span>9,500 sq ft</span>
-                                </div>
-                                <div class="property-card-price">$5,200,000</div>
-                                <button class="property-card-btn">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonials -->
-                <div class="testimonials-section">
-                    <h2 class="section-title">Client Testimonials</h2>
-                    
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Sarah made the entire process of selling our family home seamless. Her market knowledge and negotiation skills resulted in a sale price that exceeded our expectations. We couldn't have asked for a better agent!"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">JR</div>
-                            <div class="author-info">
-                                <h4>James & Rebecca Thompson</h4>
-                                <p>Sold their Beverly Hills estate</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <p class="testimonial-text">"Working with Sarah was an absolute pleasure. She understood exactly what we were looking for and found us our dream home within weeks. Her attention to detail and professionalism are unmatched."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">MC</div>
-                            <div class="author-info">
-                                <h4>Michael Chen</h4>
-                                <p>Purchased luxury penthouse in LA</p>
-                            </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Working with Sarah was an absolute pleasure. She understood exactly what we were looking for and found us our dream home within weeks. Her attention to detail and professionalism are unmatched."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Purchased luxury penthouse in LA</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Contact CTA -->
-        <div class="contact-cta">
-            <div class="cta-card">
-                <h2>Work With Sarah</h2>
-                <p>Whether you're buying or selling a luxury property, Sarah's expertise and personalized approach ensure you achieve the best possible results. Contact her today to discuss your real estate goals.</p>
-                
-                <div class="cta-buttons">
-                    <button class="cta-btn-primary" id="scheduleConsultationBtn">Schedule a Consultation</button>
-                    <button class="cta-btn-secondary" onclick="window.location.href='properties.html'">View Properties</button>
-                </div>
+    </div>
+    
+    <!-- Contact CTA -->
+    <div class="contact-cta">
+        <div class="cta-card">
+            <h2>Work With Sarah</h2>
+            <p>Whether you're buying or selling a luxury property, Sarah's expertise and personalized approach ensure you achieve the best possible results. Contact her today to discuss your real estate goals.</p>
+            
+            <div class="cta-buttons">
+                <button class="cta-btn-primary" id="scheduleConsultationBtn">
+                    <i class="fas fa-calendar-alt"></i> Schedule a Consultation
+                </button>
+                <button class="cta-btn-secondary" onclick="window.location.href='properties.html'">
+                    <i class="fas fa-home"></i> View Properties
+                </button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>LuxEstate</h3>
-                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="properties.html">Properties</a></li>
-                        <li><a href="agents.html">Our Agents</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Property Types</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Luxury Homes</a></li>
-                        <li><a href="#">Apartments</a></li>
-                        <li><a href="#">Penthouses</a></li>
-                        <li><a href="#">Villas</a></li>
-                        <li><a href="#">Condos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-links footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Luxury Estates</h3>
+                <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
             </div>
-            
-            <div class="footer-bottom">
-                <div class="copyright">
-                    &copy; 2024 LuxEstate. All rights reserved.
-                </div>
-                <ul class="footer-links-horizontal">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Site Map</a></li>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="property.html">Properties</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
+            <div class="footer-column">
+                <h3>Property Types</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Luxury Homes</a></li>
+                    <li><a href="#">Apartments</a></li>
+                    <li><a href="#">Penthouses</a></li>
+                    <li><a href="#">Villas</a></li>
+                    <li><a href="#">Condos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links footer-contact">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@luxuryestates.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                &copy; 2024 Luxury Estates. All rights reserved.
+            </div>
+            <ul class="footer-links-horizontal">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Site Map</a></li>
+            </ul>
         </div>
     </footer>
 
     <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         // Contact agent button
         document.getElementById('contactAgentBtn').addEventListener('click', function() {
-            alert('Contacting Sarah Mitchell...\n\nPhone: +1 (555) 123-4567\nEmail: sarah.mitchell@luxestate.com\n\nSarah will respond within 24 hours.');
+            // Button animation
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+            
+            setTimeout(() => {
+                alert('Contacting Sarah Mitchell...\n\nPhone: +1 (555) 123-4567\nEmail: sarah.mitchell@luxuryestates.com\n\nSarah will respond within 24 hours.');
+                this.innerHTML = '<i class="fas fa-paper-plane"></i> Contact Sarah';
+            }, 1500);
         });
         
         // Schedule consultation button
         document.getElementById('scheduleConsultationBtn').addEventListener('click', function() {
-            alert('Scheduling a consultation with Sarah Mitchell...\n\nPlease provide your preferred date and time, and Sarah will confirm the appointment within 24 hours.');
+            // Button animation
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+            
+            setTimeout(() => {
+                alert('Scheduling a consultation with Sarah Mitchell...\n\nPlease provide your preferred date and time, and Sarah will confirm the appointment within 24 hours.');
+                this.innerHTML = '<i class="fas fa-calendar-alt"></i> Schedule a Consultation';
+            }, 1500);
         });
         
         // Header contact button
-        document.querySelector('.contact-btn').addEventListener('click', function() {
-            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Scroll to contact form
+                document.querySelector('.contact-cta').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
         });
         
         // Property card buttons
         document.querySelectorAll('.property-card-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const propertyTitle = this.closest('.property-card').querySelector('.property-card-title').textContent;
-                if (this.textContent === 'View Details') {
+                
+                // Button animation
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                
+                setTimeout(() => {
                     alert(`Opening details page for "${propertyTitle}"\n\nThis would navigate to the detailed property page.`);
-                }
+                    this.innerHTML = originalText;
+                }, 1000);
             });
         });
         
-        // View all properties button
-        document.querySelector('.view-all').addEventListener('click', function() {
-            alert('Navigating to all properties page...');
-        });
-        
-        // Email click functionality
+        // Contact items click functionality
         document.querySelectorAll('.contact-item').forEach(item => {
             item.addEventListener('click', function() {
                 const text = this.querySelector('p').textContent;
+                
+                // Animation
+                this.style.transform = 'translateX(10px)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+                
                 if (text.includes('@')) {
-                    alert(`Opening email client to: ${text}`);
+                    setTimeout(() => {
+                        alert(`Opening email client to: ${text}`);
+                    }, 400);
                 } else if (text.includes('+1')) {
-                    alert(`Calling: ${text}`);
+                    setTimeout(() => {
+                        alert(`Calling: ${text}`);
+                    }, 400);
                 }
             });
+        });
+
+        // View all properties button
+        document.querySelector('.view-all').addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                alert('Navigating to all properties page...');
+                this.innerHTML = originalText;
+            }, 1000);
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated sections
+        document.querySelectorAll('.agent-profile, .properties-section, .testimonials-section, .contact-cta').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 20);
+        }
+
+        // Animate the properties sold counter on load
+        window.addEventListener('load', () => {
+            const soldCounter = document.querySelector('.properties-sold');
+            const target = parseInt(soldCounter.textContent);
+            animateCounter(soldCounter, target);
         });
     </script>
 </body>
