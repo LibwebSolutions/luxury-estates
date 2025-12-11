@@ -3,102 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contemporary Glass House | LuxEstate</title>
+    <title>Contemporary Glass House | Luxury Estates</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* --- Reset & Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background-color: #f5f5f5; color: #333; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- Header & Navigation --- */
+        header { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px); background-color: rgba(255,255,255,0.85); box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: 0.3s; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 700; color: #1a3c5e; letter-spacing: 1px; }
+        .logo span { color: #c19a6b; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { font-weight: 500; position: relative; padding:5px 0; }
+        .nav-links a::after { content:""; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:#c19a6b; transition:0.3s; }
+        .nav-links a:hover::after { width:100%; }
+        .contact-btn { background: linear-gradient(45deg,#c19a6b,#b08a5b); color: white; border: none; padding: 12px 25px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .contact-btn:hover { opacity: 0.85; }
+
+        /* --- Hamburger --- */
+        .hamburger { display: none; flex-direction: column; cursor: pointer; background:none; border:none; z-index:1010; }
+        .hamburger span { width: 25px; height: 3px; background-color: #1a3c5e; margin: 4px 0; border-radius: 2px; transition: 0.4s; }
+
+        /* --- Property Hero Section --- */
+        .property-hero { 
+            height: 80vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            color: white; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80') center/cover no-repeat; 
+            position: relative; 
+            animation: fadeInUp 1.2s ease forwards; 
+            opacity:0; 
+        }
+        
+        .property-hero-content { 
+            position: relative; 
+            z-index: 1; 
+            max-width: 900px; 
+            animation: fadeInUp 1.2s ease forwards; 
+            opacity:0; 
+            animation-delay: 0.3s; 
         }
 
-        body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
+        .property-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
-        .container {
-            width: 100%;
+        .property-hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+        }
+
+        /* Hero Animation */
+        @keyframes fadeInUp {
+            0% { opacity:0; transform: translateY(30px);}
+            100% { opacity:1; transform: translateY(0);}
+        }
+
+        /* --- Property Details Container --- */
+        .property-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header & Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a3c5e;
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: #c19a6b;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #c19a6b;
-        }
-
-        .nav-links a.active {
-            color: #c19a6b;
-            font-weight: 600;
-        }
-
-        .contact-btn {
-            background-color: #1a3c5e;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .contact-btn:hover {
-            background-color: #c19a6b;
-        }
-
-        /* Property Header */
+        /* --- Property Header --- */
         .property-header {
-            padding: 60px 0 40px;
+            background: white;
+            margin: -50px auto 60px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
         }
 
         .property-title {
-            font-size: 42px;
+            font-size: 36px;
             color: #1a3c5e;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
         }
 
         .property-location {
@@ -111,13 +112,25 @@
             gap: 10px;
         }
 
-        .property-location i {
-            font-size: 18px;
+        .property-price {
+            font-size: 42px;
+            color: #1a3c5e;
+            font-weight: 700;
+            margin: 20px 0;
         }
 
-        /* Property Gallery */
-        .property-gallery {
+        .property-id {
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-section {
             margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 0.7s;
         }
 
         .main-image {
@@ -128,6 +141,11 @@
             background-position: center;
             border-radius: 15px;
             margin-bottom: 20px;
+            transition: transform 0.5s;
+        }
+
+        .main-image:hover {
+            transform: scale(1.01);
         }
 
         .thumbnail-grid {
@@ -143,57 +161,59 @@
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s;
+            opacity: 0.8;
         }
 
-        .thumbnail:hover {
+        .thumbnail:hover,
+        .thumbnail.active {
             transform: scale(1.05);
+            opacity: 1;
         }
 
-        .thumbnail:nth-child(1) {
-            background-image: url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80');
+        /* --- Features Grid --- */
+        .features-section {
+            padding: 80px 0;
+            text-align: center;
+            background: #fff;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 0.9s;
         }
 
-        .thumbnail:nth-child(2) {
-            background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+        .section-title {
+            font-size: 38px;
+            color: #1a3c5e;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
         }
 
-        .thumbnail:nth-child(3) {
-            background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        .section-subtitle {
+            color: #777;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            font-size: 18px;
         }
 
-        .thumbnail:nth-child(4) {
-            background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');
-        }
-
-        /* Property Details */
-        .property-details {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .property-info {
-            flex: 2;
-        }
-
-        .property-sidebar {
-            flex: 1;
-        }
-
-        /* Property Features */
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
         }
 
         .feature-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            transition: transform 0.4s, box-shadow 0.4s;
+            background: #fdfdfd;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            width: 200px;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
 
         .feature-icon {
@@ -203,69 +223,59 @@
         }
 
         .feature-value {
-            font-size: 32px;
+            font-size: 48px;
             font-weight: 700;
             color: #1a3c5e;
             margin-bottom: 5px;
         }
 
         .feature-label {
+            font-size: 18px;
             color: #666;
-            font-size: 14px;
+            margin: 10px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .price-card {
-            background: linear-gradient(135deg, #1a3c5e 0%, #2c5282 100%);
-            color: white;
+        /* --- Property Content --- */
+        .property-content {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 1.1s;
+        }
+
+        .property-description {
+            flex: 2;
+            background: white;
             padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
-        .price-label {
-            font-size: 18px;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 10px;
-        }
-
-        .price-amount {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .price-subtext {
-            font-size: 16px;
-            color: rgba(255,255,255,0.7);
-        }
-
-        /* Property Description */
-        .description-card {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
-        }
-
-        .description-card h2 {
+        .property-description h2 {
             font-size: 28px;
             color: #1a3c5e;
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px solid #eee;
+            font-family: 'Playfair Display', serif;
         }
 
-        .description-card p {
+        .property-description p {
             color: #666;
             line-height: 1.8;
             margin-bottom: 20px;
             font-size: 17px;
         }
 
+        .property-sidebar {
+            flex: 1;
+        }
+
+        /* --- Amenities --- */
         .amenities-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -278,24 +288,28 @@
             align-items: center;
             gap: 10px;
             color: #555;
+            padding: 8px 0;
         }
 
         .amenities-list i {
             color: #c19a6b;
+            width: 20px;
         }
 
-        /* Contact Form */
-        .contact-agent {
-            background-color: white;
+        /* --- Contact Sidebar --- */
+        .contact-sidebar {
+            background: white;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
 
-        .contact-agent h3 {
+        .contact-sidebar h3 {
             font-size: 24px;
             color: #1a3c5e;
             margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
         }
 
         .agent-info {
@@ -311,9 +325,8 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1968&q=80');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1968&q=80') center/cover no-repeat;
         }
 
         .agent-details h4 {
@@ -324,7 +337,7 @@
 
         .agent-details p {
             color: #666;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .agent-contact {
@@ -346,6 +359,7 @@
             width: 20px;
         }
 
+        /* --- Contact Form --- */
         .inquiry-form .form-group {
             margin-bottom: 20px;
         }
@@ -372,39 +386,43 @@
 
         .schedule-btn {
             width: 100%;
-            background-color: #c19a6b;
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
             color: white;
             border: none;
             padding: 16px;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
         }
 
         .schedule-btn:hover {
-            background-color: #b08a5b;
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
-        /* Property Map */
-        .property-map {
-            margin-bottom: 80px;
+        /* --- Map Section --- */
+        .map-section {
+            padding: 80px 0;
+            background: #f9f9f9;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 1.3s;
         }
 
         .map-container {
-            background-color: white;
+            background: white;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
         .map-container h2 {
             font-size: 28px;
             color: #1a3c5e;
             margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            font-family: 'Playfair Display', serif;
         }
 
         .map-placeholder {
@@ -436,9 +454,12 @@
             max-width: 400px;
         }
 
-        /* Similar Properties */
+        /* --- Similar Properties --- */
         .similar-properties {
-            margin-bottom: 80px;
+            padding: 60px 0;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 1.5s;
         }
 
         .section-header {
@@ -446,105 +467,159 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .section-header h2 {
-            font-size: 32px;
+            font-size: 36px;
             color: #1a3c5e;
+            font-family: 'Playfair Display', serif;
         }
 
         .view-all {
-            background-color: transparent;
+            background: transparent;
             color: #c19a6b;
             border: 2px solid #c19a6b;
             padding: 12px 30px;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: 600;
+            transition: 0.3s;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .view-all:hover {
-            background-color: #c19a6b;
+            background: #c19a6b;
             color: white;
+            transform: translateY(-2px);
         }
 
+        /* Properties Grid */
         .properties-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .property-card {
-            background-color: white;
-            border-radius: 10px;
+            background: #fff;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            cursor: pointer;
         }
 
         .property-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
         }
 
-        .property-card-img {
-            height: 200px;
+        .property-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, transparent 60%, rgba(0,0,0,0.1) 100%);
+            z-index: 0;
+        }
+
+        .property-img {
+            height: 250px;
             background-size: cover;
             background-position: center;
+            border-bottom: 1px solid #eee;
+            transition: transform 0.5s;
         }
 
-        .property-card-info {
+        .property-card:hover .property-img {
+            transform: scale(1.05);
+        }
+
+        .property-info {
             padding: 25px;
+            position: relative;
+            z-index: 1;
         }
 
-        .property-card-title {
-            font-size: 20px;
+        .property-title-sm {
+            font-size: 22px;
             color: #1a3c5e;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        .property-card-location {
+        .property-location-sm {
             color: #c19a6b;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .property-card-features {
+        .property-features {
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
-            color: #666;
-            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
         }
 
-        .property-card-price {
-            font-size: 24px;
+        .feature {
+            text-align: center;
+            flex: 1;
+        }
+
+        .feature i {
+            color: #c19a6b;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .feature-value {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .feature-label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .property-price-sm {
+            font-size: 28px;
             color: #1a3c5e;
             font-weight: 700;
             margin-bottom: 20px;
         }
 
-        .property-card-btn {
+        .property-btn {
             width: 100%;
-            background-color: #1a3c5e;
+            background: linear-gradient(45deg,#1a3c5e,#1a3c5e);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
+            padding: 14px;
+            border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: 0.3s;
         }
 
-        .property-card-btn:hover {
-            background-color: #c19a6b;
+        .property-btn:hover {
+            background: linear-gradient(45deg,#c19a6b,#b08a5b);
+            transform: translateY(-2px);
         }
 
-        /* Footer */
+        /* --- Footer --- */
         footer {
-            background-color: #1a3c5e;
+            background: #1a3c5e;
             color: white;
             padding: 60px 0 30px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            animation-delay: 1.7s;
         }
 
         .footer-content {
@@ -552,7 +627,9 @@
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 40px;
-            margin-bottom: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
         }
 
         .footer-column {
@@ -564,6 +641,7 @@
             font-size: 20px;
             margin-bottom: 25px;
             color: #c19a6b;
+            font-family: 'Playfair Display', serif;
         }
 
         .footer-links {
@@ -572,11 +650,15 @@
 
         .footer-links li {
             margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .footer-links li:hover {
+            transform: translateX(5px);
         }
 
         .footer-links a {
             color: #ddd;
-            text-decoration: none;
             transition: color 0.3s;
         }
 
@@ -589,6 +671,7 @@
             align-items: flex-start;
             gap: 10px;
             margin-bottom: 15px;
+            color: #ddd;
         }
 
         .footer-contact i {
@@ -596,195 +679,215 @@
             margin-top: 4px;
         }
 
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .copyright {
+            text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
             color: #aaa;
             font-size: 14px;
-            flex-wrap: wrap;
-            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        .footer-links-horizontal {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .footer-links-horizontal a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links-horizontal a:hover {
-            color: #c19a6b;
-        }
-
-        /* Responsive */
+        /* --- Responsive --- */
         @media (max-width: 1024px) {
-            .property-details {
+            .property-hero h1 { font-size: 42px; }
+            .property-hero p { font-size: 18px; }
+            .property-content {
                 flex-direction: column;
             }
-            
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .properties-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .amenities-list {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
+            .hamburger { display: flex; }
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: #fff;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                border-top: 1px solid #eee;
+                z-index: 1000;
             }
-            
-            .property-title {
-                font-size: 32px;
+            .nav-links.active { display: flex; }
+            .nav-links li { width: 100%; }
+            .nav-links a {
+                display: block;
+                padding: 15px 0;
+                border-bottom: 1px solid #f0f0f0;
+                font-size: 17px;
             }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
+            .nav-links li:last-child a { border-bottom: none; }
+            nav .contact-btn.desktop-contact-btn { display: none; }
+            .nav-links .mobile-contact-btn {
+                display: block;
+                margin-top: 15px;
+                text-align: center;
             }
-            
-            .amenities-list {
-                grid-template-columns: 1fr;
-            }
-            
-            .thumbnail-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .properties-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .main-image {
-                height: 300px;
-            }
-            
+            .property-hero h1 { font-size: 36px; }
+            .property-hero p { font-size: 16px; }
+            .properties-grid { grid-template-columns: 1fr; gap: 20px; }
+            .thumbnail-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-image { height: 300px; }
+            .features-grid { flex-direction: column; align-items: center; gap: 20px; }
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 20px;
             }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
         }
+
+        @media (max-width: 480px) {
+            .property-header { padding: 30px 20px; }
+            .property-title { font-size: 28px; }
+            .property-price { font-size: 32px; }
+            .section-title { font-size: 32px; }
+        }
+
+        /* --- Hamburger Animation --- */
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Lux<span>Estate</span></a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="properties.html">Properties</a></li>
-                    <li><a href="agents.html">Our Agents</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <button class="contact-btn">Contact Us</button>
-            </nav>
-        </div>
+        <nav>
+            <a href="index.html" class="logo">Luxury<span>Estates</span></a>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="property.html">Properties</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-contact-btn">
+                    <button class="contact-btn" style="width:100%;">Contact Us</button>
+                </li>
+            </ul>
+            <button class="contact-btn desktop-contact-btn">Contact Us</button>
+        </nav>
     </header>
 
+    <!-- Property Hero -->
+    <section class="property-hero">
+        <div class="property-hero-content">
+            <h1>Contemporary Glass House</h1>
+            <p>Malibu, California | 6,800 Sq Ft | 5 Bedrooms | 5 Bathrooms</p>
+            <div class="property-price">$3,200,000</div>
+        </div>
+    </section>
+
     <!-- Property Header -->
-    <section class="property-header">
-        <div class="container">
+    <div class="property-container">
+        <div class="property-header">
             <h1 class="property-title">Contemporary Glass House</h1>
             <div class="property-location">
                 <i class="fas fa-map-marker-alt"></i> Malibu, CA
             </div>
+            <div class="property-price">$3,200,000</div>
+            <div class="property-id">Property ID: #MB-2023-002</div>
         </div>
-    </section>
+    </div>
 
-    <!-- Property Gallery -->
-    <section class="property-gallery">
-        <div class="container">
+    <!-- Gallery -->
+    <section class="gallery-section">
+        <div class="property-container">
             <div class="main-image" id="mainImage"></div>
             <div class="thumbnail-grid">
-                <div class="thumbnail" onclick="changeMainImage(this)" style="background-image: url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80')"></div>
-                <div class="thumbnail" onclick="changeMainImage(this)" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80')"></div>
-                <div class="thumbnail" onclick="changeMainImage(this)" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"></div>
-                <div class="thumbnail" onclick="changeMainImage(this)" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80')"></div>
+                <div class="thumbnail active" onclick="changeMainImage(this)" data-image="url('https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=1948&q=80')"></div>
+                <div class="thumbnail" onclick="changeMainImage(this)" data-image="url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80')"></div>
+                <div class="thumbnail" onclick="changeMainImage(this)" data-image="url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')"></div>
+                <div class="thumbnail" onclick="changeMainImage(this)" data-image="url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80')"></div>
             </div>
         </div>
     </section>
 
-    <!-- Property Details -->
-    <section class="property-details">
-        <div class="container">
-            <div class="property-info">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bed"></i>
-                        </div>
-                        <div class="feature-value">5</div>
-                        <div class="feature-label">Bedrooms</div>
+    <!-- Features -->
+    <section class="features-section">
+        <div class="property-container">
+            <h2 class="section-title">Property Features</h2>
+            <p class="section-subtitle">This architectural masterpiece offers panoramic ocean views through floor-to-ceiling glass walls</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bed"></i>
                     </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bath"></i>
-                        </div>
-                        <div class="feature-value">5</div>
-                        <div class="feature-label">Bathrooms</div>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-ruler-combined"></i>
-                        </div>
-                        <div class="feature-value">6,800</div>
-                        <div class="feature-label">Square Feet</div>
-                    </div>
+                    <div class="feature-value">5</div>
+                    <div class="feature-label">Bedrooms</div>
                 </div>
                 
-                <div class="description-card">
-                    <h2>Property Description</h2>
-                    <p>This breathtaking Contemporary Glass House in Malibu represents the pinnacle of modern architectural design. Situated on a private cliffside overlooking the Pacific Ocean, this residence offers panoramic ocean views from every room through its floor-to-ceiling glass walls.</p>
-                    
-                    <p>The 6,800 square foot masterpiece features an innovative open floor plan that seamlessly blends indoor and outdoor living. The main living area opens to an expansive deck with infinity-edge pool, outdoor fire pit, and multiple lounging areas perfect for entertaining or enjoying Malibu's spectacular sunsets.</p>
-                    
-                    <p>The property includes five ensuite bedrooms, each with private ocean views. The master suite features a private balcony, spa-like bathroom with natural stone finishes, and custom walk-in closets. The gourmet kitchen boasts top-of-the-line appliances, custom cabinetry, and a waterfall island that doubles as a breakfast bar.</p>
-                    
-                    <h3 style="margin-top: 30px; margin-bottom: 15px; color: #1a3c5e;">Property Features</h3>
-                    <ul class="amenities-list">
-                        <li><i class="fas fa-check"></i> Floor-to-Ceiling Glass Walls</li>
-                        <li><i class="fas fa-check"></i> Infinity-Edge Pool</li>
-                        <li><i class="fas fa-check"></i> Oceanfront Location</li>
-                        <li><i class="fas fa-check"></i> Smart Home Technology</li>
-                        <li><i class="fas fa-check"></i> Solar Power System</li>
-                        <li><i class="fas fa-check"></i> Wine Cellar</li>
-                        <li><i class="fas fa-check"></i> Home Theater</li>
-                        <li><i class="fas fa-check"></i> Outdoor Fire Pit</li>
-                        <li><i class="fas fa-check"></i> Private Beach Access</li>
-                        <li><i class="fas fa-check"></i> Heated Floors</li>
-                    </ul>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bath"></i>
+                    </div>
+                    <div class="feature-value">5</div>
+                    <div class="feature-label">Bathrooms</div>
                 </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <div class="feature-value">6,800</div>
+                    <div class="feature-label">Square Feet</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="feature-value">∞</div>
+                    <div class="feature-label">Ocean View</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Content -->
+    <section class="property-content">
+        <div class="property-container">
+            <div class="property-description">
+                <h2>Property Description</h2>
+                <p>This breathtaking Contemporary Glass House in Malibu represents the pinnacle of modern architectural design. Situated on a private cliffside overlooking the Pacific Ocean, this residence offers panoramic ocean views from every room through its floor-to-ceiling glass walls.</p>
+                
+                <p>The 6,800 square foot masterpiece features an innovative open floor plan that seamlessly blends indoor and outdoor living. The main living area opens to an expansive deck with infinity-edge pool, outdoor fire pit, and multiple lounging areas perfect for entertaining or enjoying Malibu's spectacular sunsets.</p>
+                
+                <p>The property includes five ensuite bedrooms, each with private ocean views. The master suite features a private balcony, spa-like bathroom with natural stone finishes, and custom walk-in closets. The gourmet kitchen boasts top-of-the-line appliances, custom cabinetry, and a waterfall island that doubles as a breakfast bar.</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #1a3c5e; font-size: 22px;">Property Amenities</h3>
+                <ul class="amenities-list">
+                    <li><i class="fas fa-check"></i> Floor-to-Ceiling Glass Walls</li>
+                    <li><i class="fas fa-check"></i> Infinity-Edge Pool</li>
+                    <li><i class="fas fa-check"></i> Oceanfront Location</li>
+                    <li><i class="fas fa-check"></i> Smart Home Technology</li>
+                    <li><i class="fas fa-check"></i> Solar Power System</li>
+                    <li><i class="fas fa-check"></i> Wine Cellar</li>
+                    <li><i class="fas fa-check"></i> Home Theater</li>
+                    <li><i class="fas fa-check"></i> Outdoor Fire Pit</li>
+                    <li><i class="fas fa-check"></i> Private Beach Access</li>
+                    <li><i class="fas fa-check"></i> Heated Floors</li>
+                </ul>
             </div>
             
             <div class="property-sidebar">
-                <div class="price-card">
-                    <div class="price-label">Asking Price</div>
-                    <div class="price-amount">$3,200,000</div>
-                    <div class="price-subtext">Property ID: #MB-2023-002</div>
-                </div>
-                
-                <div class="contact-agent">
+                <div class="contact-sidebar">
                     <h3>Schedule a Viewing</h3>
                     
                     <div class="agent-info">
@@ -807,7 +910,7 @@
                         </div>
                     </div>
                     
-                    <form class="inquiry-form">
+                    <form class="inquiry-form" id="viewingForm">
                         <div class="form-group">
                             <input type="text" placeholder="Your Name" required>
                         </div>
@@ -827,9 +930,9 @@
         </div>
     </section>
 
-    <!-- Property Map -->
-    <section class="property-map">
-        <div class="container">
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="property-container">
             <div class="map-container">
                 <h2>Location & Neighborhood</h2>
                 <div class="map-placeholder">
@@ -843,7 +946,7 @@
 
     <!-- Similar Properties -->
     <section class="similar-properties">
-        <div class="container">
+        <div class="property-container">
             <div class="section-header">
                 <h2>Similar Properties</h2>
                 <button class="view-all" onclick="window.location.href='properties.html'">View All Properties</button>
@@ -852,49 +955,85 @@
             <div class="properties-grid">
                 <!-- Property 1 -->
                 <div class="property-card">
-                    <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                    <div class="property-card-info">
-                        <h3 class="property-card-title">Luxury Modern Mansion</h3>
-                        <div class="property-card-location">Beverly Hills, CA</div>
-                        <div class="property-card-features">
-                            <span>6 Beds</span>
-                            <span>7 Baths</span>
-                            <span>8,500 sq ft</span>
+                    <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                    <div class="property-info">
+                        <h3 class="property-title-sm">Luxury Modern Mansion</h3>
+                        <div class="property-location-sm"><i class="fas fa-map-marker-alt"></i> Beverly Hills, CA</div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="feature-value">6</div>
+                                <div class="feature-label">Bedrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <div class="feature-value">7</div>
+                                <div class="feature-label">Bathrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="feature-value">8,500</div>
+                                <div class="feature-label">Sq Ft</div>
+                            </div>
                         </div>
-                        <div class="property-card-price">$4,500,000</div>
-                        <button class="property-card-btn" onclick="window.location.href='property1.html'">View Details</button>
+                        <div class="property-price-sm">$4,500,000</div>
+                        <button class="property-btn" onclick="window.location.href='property1.html'">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Property 2 -->
                 <div class="property-card">
-                    <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
-                    <div class="property-card-info">
-                        <h3 class="property-card-title">Downtown Luxury Penthouse</h3>
-                        <div class="property-card-location">Manhattan, NY</div>
-                        <div class="property-card-features">
-                            <span>4 Beds</span>
-                            <span>4 Baths</span>
-                            <span>4,200 sq ft</span>
+                    <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');"></div>
+                    <div class="property-info">
+                        <h3 class="property-title-sm">Downtown Penthouse</h3>
+                        <div class="property-location-sm"><i class="fas fa-map-marker-alt"></i> Manhattan, NY</div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="feature-value">4</div>
+                                <div class="feature-label">Bedrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <div class="feature-value">4</div>
+                                <div class="feature-label">Bathrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="feature-value">4,200</div>
+                                <div class="feature-label">Sq Ft</div>
+                            </div>
                         </div>
-                        <div class="property-card-price">$2,800,000</div>
-                        <button class="property-card-btn">View Details</button>
+                        <div class="property-price-sm">$2,800,000</div>
+                        <button class="property-btn">View Details</button>
                     </div>
                 </div>
                 
                 <!-- Property 3 -->
                 <div class="property-card">
-                    <div class="property-card-img" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
-                    <div class="property-card-info">
-                        <h3 class="property-card-title">Mediterranean Villa</h3>
-                        <div class="property-card-location">Miami Beach, FL</div>
-                        <div class="property-card-features">
-                            <span>7 Beds</span>
-                            <span>8 Baths</span>
-                            <span>9,500 sq ft</span>
+                    <div class="property-img" style="background-image: url('https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80');"></div>
+                    <div class="property-info">
+                        <h3 class="property-title-sm">Mediterranean Villa</h3>
+                        <div class="property-location-sm"><i class="fas fa-map-marker-alt"></i> Miami Beach, FL</div>
+                        <div class="property-features">
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <div class="feature-value">7</div>
+                                <div class="feature-label">Bedrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bath"></i>
+                                <div class="feature-value">8</div>
+                                <div class="feature-label">Bathrooms</div>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div class="feature-value">9,500</div>
+                                <div class="feature-label">Sq Ft</div>
+                            </div>
                         </div>
-                        <div class="property-card-price">$5,200,000</div>
-                        <button class="property-card-btn">View Details</button>
+                        <div class="property-price-sm">$5,200,000</div>
+                        <button class="property-btn">View Details</button>
                     </div>
                 </div>
             </div>
@@ -903,73 +1042,81 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>LuxEstate</h3>
-                    <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="properties.html">Properties</a></li>
-                        <li><a href="agents.html">Our Agents</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Property Types</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Luxury Homes</a></li>
-                        <li><a href="#">Apartments</a></li>
-                        <li><a href="#">Penthouses</a></li>
-                        <li><a href="#">Villas</a></li>
-                        <li><a href="#">Condos</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-links footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@luxestate.com</li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Luxury Estates</h3>
+                <p>Your trusted partner in finding luxury properties worldwide. Excellence in every detail.</p>
             </div>
-            
-            <div class="footer-bottom">
-                <div class="copyright">
-                    &copy; 2024 LuxEstate. All rights reserved.
-                </div>
-                <ul class="footer-links-horizontal">
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Site Map</a></li>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="property.html">Properties</a></li>
+                    <li><a href="service.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
+            <div class="footer-column">
+                <h3>Property Types</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Luxury Homes</a></li>
+                    <li><a href="#">Apartments</a></li>
+                    <li><a href="#">Penthouses</a></li>
+                    <li><a href="#">Villas</a></li>
+                    <li><a href="#">Condos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="footer-links footer-contact">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Beverly Hills, CA 90210</li>
+                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> info@luxuryestates.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2024 Luxury Estates. All rights reserved.
         </div>
     </footer>
 
     <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         // Change main image when thumbnail is clicked
         function changeMainImage(element) {
             const mainImage = document.getElementById('mainImage');
-            const thumbnailUrl = element.style.backgroundImage;
-            mainImage.style.backgroundImage = thumbnailUrl;
+            const imageUrl = element.getAttribute('data-image');
+            mainImage.style.backgroundImage = imageUrl;
             
             // Remove active class from all thumbnails
             document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.style.opacity = '0.8';
+                thumb.classList.remove('active');
             });
             
             // Add active class to clicked thumbnail
-            element.style.opacity = '1';
+            element.classList.add('active');
         }
         
         // Schedule viewing form submission
-        document.querySelector('.inquiry-form').addEventListener('submit', function(e) {
+        document.getElementById('viewingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = this.querySelector('input[type="text"]').value;
@@ -981,27 +1128,38 @@
         });
         
         // Header contact button
-        document.querySelector('.contact-btn').addEventListener('click', function() {
-            alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Connecting you with our team...\n\nOne of our luxury specialists will contact you shortly.');
+            });
         });
         
         // Similar property buttons
-        document.querySelectorAll('.property-card-btn').forEach(button => {
+        document.querySelectorAll('.property-btn').forEach(button => {
             button.addEventListener('click', function() {
                 if (this.textContent === 'View Details') {
-                    const propertyTitle = this.closest('.property-card').querySelector('.property-card-title').textContent;
-                    alert(`Opening details page for "${propertyTitle}"\n\nThis would navigate to the detailed property page.`);
+                    const propertyTitle = this.closest('.property-card').querySelector('.property-title-sm').textContent;
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    
+                    setTimeout(() => {
+                        alert(`Opening details page for "${propertyTitle}"\n\nThis would navigate to the detailed property page.`);
+                        this.innerHTML = originalText;
+                    }, 1000);
                 }
             });
         });
         
         // View all properties button
         document.querySelector('.view-all').addEventListener('click', function() {
-            alert('Navigating to all properties page...');
+            const originalText = this.innerHTML;
+            this.innerHTML = 'Loading...';
+            
+            setTimeout(() => {
+                alert('Navigating to all properties page...');
+                this.innerHTML = originalText;
+            }, 1000);
         });
-        
-        // Initialize first thumbnail as active
-        document.querySelector('.thumbnail').style.opacity = '1';
     </script>
 </body>
 </html>
